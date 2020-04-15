@@ -1,8 +1,7 @@
 package org.jrg.creator;
 
-
+import org.jrg.convertor.*;
 import static org.neo4j.configuration.GraphDatabaseSettings.DEFAULT_DATABASE_NAME;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -174,6 +173,11 @@ public class ExtendedJRGCreator {
 
 			writeHashTableToFile(dpGraph.getCanonicalNodeHashMap());
 
+			// call convertor to convert to Java Project
+			ExtendedJRGConvertor convertor = new ExtendedJRGConvertor(graphDb, tx);
+			convertor.createJavaProject();
+			
+			
 			shutDown(graphDb);
 		} catch (Exception e) {
 			e.printStackTrace();
